@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+      /* Basic Options */
+      "target": "es5",
+      "lib": ["esnext", "dom"],
+      "declaration": false,
+  
+      /* Module Options */
+      "module": "esnext",
+      "moduleResolution": "node",
+  
+      /* Strict Type-Checking Options */
+      "strict": true,
+  
+      /* Debug Options */
+      "sourceMap": true,
+      "pretty": true,
+      "locale": "ja"
+    }
+  }
+  

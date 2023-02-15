@@ -1,0 +1,10 @@
+[package]
+name = "wasm-dev-book-webpack"
+version = "0.1.0"
+
+[dependencies]
+wasm-bindgen = { git = "https://github.com/rustwasm/wasm-bindgen.git", tag = "0.2.84" }
+tinymt = { git = "https://github.com/mizdra/rust-tinymt", tag = "0.1.0" }
+
+[lib]
+crate-type = ["cdylib"]
