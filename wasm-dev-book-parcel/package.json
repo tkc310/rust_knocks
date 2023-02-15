@@ -1,0 +1,13 @@
+{
+  "name": "wasm-dev-book-parcel",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "npm run dev",
+    "build": "parcel build src/index.html",
+    "dev": "parcel src/index.html"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5"
+  }
+}

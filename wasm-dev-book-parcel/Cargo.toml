@@ -1,0 +1,9 @@
+[package]
+name = "wasm-dev-book-parcel"
+version = "0.1.0"
+
+[dependencies]
+tinymt = { git = "https://github.com/mizdra/rust-tinymt", tag = "0.1.0" }
+
+[lib]
+crate-type = ["cdylib"]
