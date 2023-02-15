@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Hello, WebAssembly!</title>
+  <script>
+    const wasm = '/target/wasm32-unknown-unknown/release/wasm_dev_book_hello_wasm.wasm';
+    console.log({wasm});
+
+    const imports = {
+      env: {
+        date_now: Date.now,
+      },
+    };
+
+    const toUint32 = (num) => num >>> 0
+
+    fetch(wasm)
+      .then(response => response.arrayBuffer())
+      .then(bytes => WebAssembly.instantiate(bytes, imports))
+      .then(results => {
+        const { add, get_timestamp, rand } = results.instance.exports;
+
+        console.log({
+          add: add(3),
+          get_timestamp: get_timestamp(),
+          rand: toUint32(rand())
+        })
+      })
+  </script>
+</head>
+
+</html>
