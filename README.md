@@ -85,5 +85,5 @@ $ npm run prepublishOnly
 
 - playgroundでASTを確認できる  
 https://swc.rs/playground  
-
-
+- ライブラリは軒並みメジャーリリースされておらず、参考記事のインポート元( `use` )もまばらだった  
+- next.jsの[swcカスタムプラグイン機能](https://nextjs.org/docs/advanced-features/compiler#swc-plugins-experimental)もexperimentalなので、自作してメンテナンスするリスクは高そうだった (vercelが提供するプラグインのみ利用するのが無難そう)
