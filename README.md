@@ -2,11 +2,19 @@
 
 ## 環境構築
 
+asdf経由だとcargoのパスが上手く通らなかったので直接インストールする。
+
 ```
-$ brew install asdf
-$ asdf plugin add rust
-$ asdf install rust
+$ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+$ echo 'export PATH="$PATH:$HOME/.cargo/bin"' >> ~/.zprofile
+$ echo 'export PATH="$PATH:$HOME/.cargo/env"' >> ~/.zprofile
+$ rustup install stable
+$ rustup target add wasm32-wasi wasm32-unknown-unknown
 ```
+
+vscodeにランゲージサーバの拡張機能 `rust-analyzer` をインストール。  
+(これを入れないと静的解析されない、コードジャンプできないので必須)  
+`Cargo.toml` が存在するディレクトリで有効になる
 
 ## 基礎
 
@@ -31,16 +39,19 @@ $ cargo test
 
 ```
 # wasm用のコンパイルを有効化
-$ rustup target add wasm32-unknown-unknown
-$ cargo new --lib wasm-dev-book-hello-wasm
 $ cd wasm-dev-book-hello-wasm
+$ cargo new --lib crate
+
+# wasm-packインストール
+$ cargo install wasm-pack
+
 # wasmバイナリーのビルド
-$ cargo build --target=wasm32-unknown-unknown --release
+$ npm run build
 $ npx serve .
 $ open http://localhost:3000
 ```
 
-### 学び
+### ログ
 
 - 暗黙の型変換
 wasmのプリミティブ型はi32, i64, f32, f64の4つしかサポートしないため、rustから変換されたコードには型変換が生じる  
@@ -54,7 +65,25 @@ https://wasm-dev-book.netlify.app/hello-wasm.html#%E6%9A%97%E9%BB%99%E3%81%AE%E5
 
 ## swcプラグイン
 
-AST周りのインターフェースをあまり触らなくてよさそうなサンプルで雰囲気だけ学習する。  
-(swcにおけるASTのAPIを知ることは重要でない)
+AST周りのインターフェースをあまり触らなくてよさそうなサンプルで雰囲気だけ学習したい。  
 
-https://zenn.dev/nissy_dev/articles/create-swc-plugin
+@refs:
+- [公式](https://swc.rs/docs/plugin/ecmascript/getting-started)
+- https://zenn.dev/nissy_dev/articles/create-swc-plugin
+- https://zenn.dev/sakamuuy/articles/implement-swc-plugin
+- https://www.wantedly.com/companies/wantedly/post_articles/386347
+
+### Usage
+
+```
+$ cargo install swc_cli
+$ swc plugin new swc --target-type wasm32-wasi
+$ npm run prepublishOnly
+```
+
+### ログ
+
+- playgroundでASTを確認できる  
+https://swc.rs/playground  
+
+
